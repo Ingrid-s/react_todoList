@@ -1,29 +1,28 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 import './styles/todoform.css'
 
+
 class ToDoForm extends React.Component{
-   constructor(){
-       super()
-           this.state={
-            task:'',
-           }
-       }
-    
+    state = {};
 
-    onChange = e => {
+    handleChange = e => {
+              this.setState({
+           [e.target.name]: e.target.value,
+        });
+       
+    };
+
+    handleClick = e =>{
+             console.log("Le diste click al boton")
+                  
+    };
+
+    handleSubmit = e =>{
         e.preventDefault();
-        this.setState({
-            task: e.target.value,
-        })
-        console.log(e.target.value)
-    }
-
-    onSubmit = e =>{
-        e.preventDefault();
-        console.log(this.state.task)
-
-    }
+        console.log(this.state)
+             
+};
 
 
     render(){
@@ -33,18 +32,18 @@ class ToDoForm extends React.Component{
             <div className="container form-container">
                 <div className="row">
                     <div className="col">
-                        <form className="form-inline mx-auto mt-5 form-section-inline">
+                        <form onSubmit={this.handleSubmit} className="form-inline mx-auto mt-5 form-section-inline">
                             <div className="form-group ">
-                                <input onChange={this.onChange} name="task" type="text" className="form-control" id="addTask" placeholder="Add task" />  
+                                <input onChange={this.handleChange} name="task" type="text" className="form-control" id="addTask" placeholder="Add task" value={this.state.task}/>  
                             </div>
-                            <button onClick={this.onSubmit} type="submit" className="btn btn-outline-dark ml-2">Submit</button>
+                            <button onClick={this.handleClick} className="btn btn-outline-dark ml-2">Submit</button>
                         </form>
                     </div>
                 </div>
             </div>
-        )
+        );
       
-    }
-}
+    };
+};
 
 export default ToDoForm;
